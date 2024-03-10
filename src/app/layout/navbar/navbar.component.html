@@ -1,0 +1,67 @@
+<div class="max-w-screen w-full">
+    <div class="relative mx-auto max-w-[1440px] w-full lg:px-[80px] px-[16px] lg:py-[24px] py-[16px]">
+        <div class="lg:px-[32px] px-0 flex justify-between items-center w-full">
+            <button class="flex gap-1 items-start z-[5]">
+                <span class="material-symbols-outlined md:text-22 text-18 md:leading-[24px] leading-[20px] font-[600]">developer_mode_tv</span>
+                <h1 class="md:text-18 text-14 font-[800] md:leading-[24px] leading-[20px]">NANDHU</h1>
+            </button>
+
+            <ul class="md:flex hidden items-center gap-[32px] text-16 font-[500] leading-[22px] font-roboto">
+                <li>
+                    <a [routerLink]=" '/about' "  [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'about'}" (click)="clickedMenu = 'about'">About Me</a>
+                </li>
+
+                <li>
+                    <a [routerLink]=" '/skills' "  [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'skills'}" (click)="clickedMenu = 'skills'">Skills</a>
+                </li>
+
+                <li>
+                    <a [routerLink]=" '/projects' "  [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'projects'}" (click)="clickedMenu = 'projects'">Projects</a>
+                </li>
+
+                <li>
+                    <a [routerLink]=" '/contact' "  [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'contact'}" (click)="clickedMenu = 'contact'">Contact Me</a>
+                </li>
+            </ul>
+
+            <button class="md:flex hidden items-center gap-1 text-[#fff] bg-black rounded-[4px] text-14 leading-[22px] font-semibold px-[24px] py-[8px]">
+                <h2>Resume</h2>
+                <span class="material-symbols-outlined">download</span>
+            </button>
+            
+            <span class="material-symbols-outlined text-22 leading-[24px] menuIcon font-[600] md:hidden block cursor-pointer" *ngIf="!flagMobileMenuDrawerVisible" (click)="toggleNavbar()">menu</span>
+            <span class="material-symbols-outlined text-22 leading-[24px] font-[600] md:hidden block cursor-pointer z-20" *ngIf="flagMobileMenuDrawerVisible" (click)="toggleNavbar()">close</span>
+            
+            <div class="mobileDrawer bg-white md:hidden min-h-screen w-[250px] absolute right-0 top-0 z-10 px-[32px] flex flex-col gap-[24px] overflow-hidden" [@openClose]="flagMobileMenuDrawerVisible ? 'open' : 'closed'" *ngIf="flagMobileMenuDrawerVisible">
+
+                <ul class="flex flex-col justify-center gap-[32px] text-14 font-[500] leading-[20px] font-roboto align-middle mt-10" [@fadeInOut]>
+
+                    <li>
+                        <button class="flex items-center gap-1 text-[#fff] bg-black rounded-[4px] text-14 leading-[22px] font-semibold px-[24px] py-[8px] w-fit">
+                            <h2>Resume</h2>
+                            <span class="material-symbols-outlined">download</span>
+                        </button>
+                    </li>
+
+                    <li>
+                        <a [routerLink]=" '/about' " [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'about'}" (click)="clickedMenu = 'about'">About Me</a>
+                    </li>
+    
+                    <li>
+                        <a [routerLink]=" '/skills' " [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'skills'}" (click)="clickedMenu = 'skills'">Skills</a>
+                    </li>
+    
+                    <li>
+                        <a [routerLink]=" '/projects' " [ngClass]="{'active': clickedMenu === 'projects'}" (click)="clickedMenu = 'projects'">Projects</a>
+                    </li>
+    
+                    <li>
+                        <a [routerLink]=" '/contact' " [ngClass]="{'active': clickedMenu === 'contact'}" (click)="clickedMenu = 'contact'">Contact Me</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    
+</div>
