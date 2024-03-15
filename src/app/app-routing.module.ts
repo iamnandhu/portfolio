@@ -7,7 +7,10 @@ const routes: Routes = [
     path: "",
     component: LayoutComponent,
     children: [
-      
+     {
+      path: "",
+      loadChildren: ()=> import('./landing-page/landing-page.module').then(m => m.LandingPageModule)
+     }
     ]
   }
 ];
