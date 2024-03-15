@@ -13,7 +13,7 @@ import { FooterComponent } from './layout/footer/footer.component';
     AppComponent,
     LayoutComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
