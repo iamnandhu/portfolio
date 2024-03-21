@@ -8,4 +8,9 @@
     border-image-slice: 1;
     width:100%;
     animation: 300ms forwards;
-  }
+}
+
+.mobile-nav-bg {
+    background: rgba(10, 10, 11, 0.55);
+    backdrop-filter: blur(2.5px);
+}

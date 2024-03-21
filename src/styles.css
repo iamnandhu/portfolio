@@ -22,4 +22,8 @@ body {
 ::selection {
     color: #fafafa;
     background: #6661F2;
-  }
+}
+
+.no-scroll {
+    overflow: hidden;
+}
