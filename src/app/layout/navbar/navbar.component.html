@@ -28,11 +28,11 @@
                 <h2>Resume</h2>
                 <span class="material-symbols-outlined">download</span>
             </button>
-            
-            <span class="material-symbols-outlined text-22 leading-[24px] menuIcon font-[600] md:hidden block cursor-pointer" *ngIf="!flagMobileMenuDrawerVisible" (click)="toggleNavbar()">menu</span>
+        
+            <span class="material-symbols-outlined text-22 leading-[24px] navMenu font-[600] md:hidden block cursor-pointer" *ngIf="!flagMobileMenuDrawerVisible" (click)="toggleNavbar()">menu</span>
             <span class="material-symbols-outlined text-22 leading-[24px] font-[600] md:hidden block cursor-pointer z-20" *ngIf="flagMobileMenuDrawerVisible" (click)="toggleNavbar()">close</span>
             
-            <div class="mobileDrawer bg-white md:hidden min-h-screen w-[250px] absolute right-0 top-0 z-10 px-[32px] flex flex-col gap-[24px] overflow-hidden" [@openClose]="flagMobileMenuDrawerVisible ? 'open' : 'closed'" *ngIf="flagMobileMenuDrawerVisible">
+            <div  class="mobileDrawer bg-white min-h-screen w-[250px] absolute right-0 top-0 z-10 px-[32px] flex flex-col gap-[24px] overflow-hidden" [@openClose]="flagMobileMenuDrawerVisible ? 'open' : 'closed'" *ngIf="flagMobileMenuDrawerVisible">
 
                 <ul class="flex flex-col justify-center gap-[32px] text-14 font-[500] leading-[20px] font-roboto align-middle mt-10" [@fadeInOut]>
 

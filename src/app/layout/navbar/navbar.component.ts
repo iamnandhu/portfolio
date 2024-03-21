@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { trigger, style, transition, animate, state, animateChild, group, query } from '@angular/animations';
+import { Component, HostListener, OnInit, Renderer2 } from '@angular/core';
+import { trigger, style, transition, group, animate, state, animateChild, query } from '@angular/animations';
 
 @Component({
   selector: 'app-navbar',
@@ -14,15 +14,16 @@ import { trigger, style, transition, animate, state, animateChild, group, query 
         width: '0px'
       })),
       transition('open => closed', [
+        style({ width: '250px' }),
         group([
+          animate('1s ease-out', style({ width: '0px' })),
           query('@fadeInOut', animateChild()),
-          animate('0.5s ease-in-out', style({ width: '0px' }))
         ])
       ]),
       transition('closed => open', [
         style({ width: '0px' }),
         group([
-          animate('0.5s ease-in-out', style({ width: '250px' })),
+          animate('1s ease-in', style({ width: '250px' })),
           query('@fadeInOut', animateChild())
         ])
       ])
@@ -39,19 +40,34 @@ import { trigger, style, transition, animate, state, animateChild, group, query 
   ]
 })
 export class NavbarComponent implements OnInit {
-  @ViewChild('mobileDrawer') mobileDrawer: any;
-  @ViewChild('menuIcon') menuIcon: any;
   flagMobileMenuDrawerVisible: boolean = false;
   clickedMenu: string = ""
+  private clickInside: boolean = false;
 
-  constructor() { 
+  constructor(private _renderer: Renderer2) {}
+
+  ngOnInit(): void {}
+
+  @HostListener('click')
+  clickInsideComponent() {
+    this.clickInside = true;
   }
 
-  ngOnInit(): void {
+  @HostListener('document:click')
+  clickout() {
+    if (!this.clickInside && this.flagMobileMenuDrawerVisible) {
+      this.toggleNavbar();
+    }
+    this.clickInside = false; 
   }
 
   toggleNavbar(): void {
-    this.flagMobileMenuDrawerVisible = !this.flagMobileMenuDrawerVisible
-  }
+    this.flagMobileMenuDrawerVisible = !this.flagMobileMenuDrawerVisible;
+    if(this.flagMobileMenuDrawerVisible) {
+      this._renderer.addClass(document.body, "no-scroll")
+      return
+    }
 
+    this._renderer.removeClass(document.body, "no-scroll")
+  }
 }
