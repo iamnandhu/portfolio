@@ -1,0 +1,11 @@
+.tech-card:hover {
+   background: #000;
+}
+
+.tech-card:hover p {
+    color: #FFF;
+}
+
+.tech-card:hover i {
+    color: #FFF;
+}
