@@ -1,3 +1,24 @@
-<app-hero></app-hero>
-<app-skills></app-skills>
-<app-experience></app-experience>
+<div id="top" #topComponent class="absolute top-[-200px] left-0 w-full h-[1px]"></div>
+
+<!-- Create space for navbar -->
+<div class="h-[80px] w-full" id="navbar-space"></div>
+
+<div id="home" class="section">
+    <app-hero #homeComponent></app-hero>
+</div>
+
+<div id="skills" class="section">
+    <app-skills #skillsComponent></app-skills>
+</div>
+
+<div class="section" id="experiences">
+    <app-experience #experienceComponent></app-experience>
+</div>
+
+<div class="section" id="projects">
+    <app-projects #projectsComponent></app-projects>
+</div>
+
+<div class="section" id="contact">
+    <app-contact #contactComponent></app-contact>
+</div>

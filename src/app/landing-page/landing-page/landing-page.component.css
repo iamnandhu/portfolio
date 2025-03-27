@@ -1,0 +1,56 @@
+/* Remove horizontal overflow */
+:host {
+    display: block;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 10;
+}
+
+.section {
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 10;
+}
+
+.landing-page {
+    position: relative;
+    z-index: 10;
+    background-color: white;
+}
+
+section {
+    position: relative;
+    z-index: 10;
+    background-color: white;
+}
+
+.hero-section {
+    position: relative;
+    z-index: 10;
+    background-color: white;
+}
+
+.skills-section {
+    position: relative;
+    z-index: 10;
+    background-color: white;
+}
+
+.projects-section {
+    position: relative;
+    z-index: 10;
+    background-color: white;
+}
+
+.experience-section {
+    position: relative;
+    z-index: 10;
+    background-color: white;
+}
+
+.contact-section {
+    position: relative;
+    z-index: 10;
+    background-color: white;
+}

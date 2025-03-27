@@ -1,73 +1,69 @@
-import { Component, HostListener, OnInit, Renderer2 } from '@angular/core';
-import { trigger, style, transition, group, animate, state, animateChild, query } from '@angular/animations';
+import { Component, HostListener } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   animations: [
     trigger('openClose', [
       state('open', style({
-        width: '250px'
+        transform: 'translateX(0%)'
       })),
       state('closed', style({
-        width: '0px'
+        transform: 'translateX(100%)'
       })),
       transition('open => closed', [
-        style({ width: '250px' }),
-        group([
-          animate('1s ease-out', style({ width: '0px' })),
-          query('@fadeInOut', animateChild()),
-        ])
+        animate('0.3s ease-in-out')
       ]),
       transition('closed => open', [
-        style({ width: '0px' }),
-        group([
-          animate('1s ease-in', style({ width: '250px' })),
-          query('@fadeInOut', animateChild())
-        ])
+        animate('0.3s ease-in-out')
       ])
     ]),
-    trigger('fadeInOut', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateX(100%)' }),
-        animate('0.3s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
+    trigger('floatingNavbar', [
+      state('visible', style({
+        opacity: 1,
+        transform: 'translateX(0)'
+      })),
+      state('hidden', style({
+        opacity: 0,
+        transform: 'translateX(100%)'
+      })),
+      transition('hidden => visible', [
+        animate('0.3s ease-out')
       ]),
-      transition(':leave', [
-        animate('0.3s ease-out', style({ opacity: 0, transform: 'translateX(100%)' })),
+      transition('visible => hidden', [
+        animate('0.3s ease-in')
       ])
     ])
   ]
 })
-export class NavbarComponent implements OnInit {
-  flagMobileMenuDrawerVisible: boolean = false;
-  clickedMenu: string = ""
-  private clickInside: boolean = false;
+export class NavbarComponent {
+  flagMobileMenuDrawerVisible = false;
+  isScrolled = false;
 
-  constructor(private _renderer: Renderer2) {}
-
-  ngOnInit(): void {}
-
-  @HostListener('click')
-  clickInsideComponent() {
-    this.clickInside = true;
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+    this.isScrolled = window.scrollY > 100;
   }
 
-  @HostListener('document:click')
-  clickout() {
-    if (!this.clickInside && this.flagMobileMenuDrawerVisible) {
-      this.toggleNavbar();
-    }
-    this.clickInside = false; 
-  }
-
-  toggleNavbar(): void {
+  toggleNavbar() {
     this.flagMobileMenuDrawerVisible = !this.flagMobileMenuDrawerVisible;
-    if(this.flagMobileMenuDrawerVisible) {
-      this._renderer.addClass(document.body, "no-scroll")
-      return
-    }
+  }
 
-    this._renderer.removeClass(document.body, "no-scroll")
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  scrollToComponent(componentId: string) {
+    this.flagMobileMenuDrawerVisible = false;
+    const element = document.getElementById(componentId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }

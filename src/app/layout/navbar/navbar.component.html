@@ -1,5 +1,5 @@
 <div class="max-w-screen w-full">
-    <div class="relative mx-auto max-w-[1440px] w-full lg:px-[80px] px-[16px] lg:py-[24px] py-[16px]">
+    <div class="relative mx-auto max-w-[1400px] w-full lg:px-[80px] px-[16px] lg:py-[24px] py-[16px]">
         <div class="lg:px-[32px] px-0 flex justify-between items-center w-full">
             <button class="flex gap-1 items-start z-[5]">
                 <span class="material-symbols-outlined md:text-22 text-18 md:leading-[24px] leading-[20px] font-[600]">developer_mode_tv</span>
@@ -8,19 +8,15 @@
 
             <ul class="md:flex hidden items-center gap-[32px] text-16 font-[500] leading-[22px] font-roboto">
                 <li>
-                    <a [routerLink]=" '/about' "  [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'about'}" (click)="clickedMenu = 'about'">About Me</a>
+                    <a [routerLink]="[]" fragment="skills" (click)="scrollToComponent('skills')">Skills</a>
                 </li>
 
                 <li>
-                    <a [routerLink]=" '/skills' "  [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'skills'}" (click)="clickedMenu = 'skills'">Skills</a>
+                    <a [routerLink]="[]" fragment="projects" (click)="scrollToComponent('projects')">Projects</a>
                 </li>
 
                 <li>
-                    <a [routerLink]=" '/projects' "  [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'projects'}" (click)="clickedMenu = 'projects'">Projects</a>
-                </li>
-
-                <li>
-                    <a [routerLink]=" '/contact' "  [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'contact'}" (click)="clickedMenu = 'contact'">Contact Me</a>
+                    <a [routerLink]="[]" fragment="contact" (click)="scrollToComponent('contact')">Contact Me</a>
                 </li>
             </ul>
 
@@ -44,19 +40,15 @@
                     </li>
 
                     <li>
-                        <a [routerLink]=" '/about' " [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'about'}" (click)="clickedMenu = 'about'">About Me</a>
+                        <a [routerLink]="[]" fragment="skills" (click)="scrollToComponent('skills')">Skills</a>
                     </li>
     
                     <li>
-                        <a [routerLink]=" '/skills' " [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'skills'}" (click)="clickedMenu = 'skills'">Skills</a>
+                        <a [routerLink]="[]" fragment="projects" (click)="scrollToComponent('projects')">Projects</a>
                     </li>
     
                     <li>
-                        <a [routerLink]=" '/projects' " [ngClass]="{'active': clickedMenu === 'projects'}" (click)="clickedMenu = 'projects'">Projects</a>
-                    </li>
-    
-                    <li>
-                        <a [routerLink]=" '/contact' " [ngClass]="{'active': clickedMenu === 'contact'}" (click)="clickedMenu = 'contact'">Contact Me</a>
+                        <a [routerLink]="[]" fragment="contact" (click)="scrollToComponent('contact')">Contact Me</a>
                     </li>
                 </ul>
 
@@ -64,4 +56,41 @@
         </div>
     </div>
     
+</div>
+<!-- Floating Glassmorphic Navbar -->
+<div [@floatingNavbar]="isScrolled ? 'visible' : 'hidden'"
+    class="fixed right-2 top-[45%] transform -translate-y-1/2 z-50">
+    <ul class="flex flex-col items-center gap-5 p-4 floating-navbar">
+        <li class="w-10 h-10">
+            <button (click)="scrollToTop()"
+                class="nav-icon w-full h-full focus:outline-none active:outline-none active:bg-transparent"
+                title="Back to Top">
+                <span class="material-symbols-outlined">arrow_upward</span>
+            </button>
+        </li>
+        <li class="w-10 h-10">
+            <a [routerLink]="[]" fragment="skills" (click)="scrollToComponent('skills')"
+                class="nav-icon focus:outline-none active:outline-none active:bg-transparent" title="Skills">
+                <span class="material-symbols-outlined">code</span>
+            </a>
+        </li>
+        <li class="w-10 h-10">
+            <a [routerLink]="[]" fragment="experiences" (click)="scrollToComponent('experiences')"
+                class="nav-icon focus:outline-none active:outline-none active:bg-transparent" title="Experience">
+                <span class="material-symbols-outlined">work</span>
+            </a>
+        </li>
+        <li class="w-10 h-10">
+            <a [routerLink]="[]" fragment="projects" (click)="scrollToComponent('projects')"
+                class="nav-icon focus:outline-none active:outline-none active:bg-transparent" title="Projects">
+                <span class="material-symbols-outlined">sdk</span>
+            </a>
+        </li>
+        <li class="w-10 h-10">
+            <a [routerLink]="[]" fragment="contact" (click)="scrollToComponent('contact')"
+                class="nav-icon focus:outline-none active:outline-none active:bg-transparent" title="Contact">
+                <span class="material-symbols-outlined">mail</span>
+            </a>
+        </li>
+    </ul>
 </div>

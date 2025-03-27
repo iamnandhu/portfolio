@@ -1,5 +1,6 @@
 .mobileDrawer {
     box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.5);
+    padding-top: 64px;
 }
 
 .active {
@@ -13,4 +14,120 @@
 .mobile-nav-bg {
     background: rgba(10, 10, 11, 0.55);
     backdrop-filter: blur(2.5px);
+}
+.floating-navbar {
+    position: fixed;
+    right: 0.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Add a subtle rainbow gradient border effect */
+.floating-navbar::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 0, 0, 0.1), rgba(255, 166, 0, 0.1), rgba(0, 128, 0, 0.1), rgba(0, 0, 255, 0.1), rgba(76, 0, 130, 0.1));
+    z-index: -1;
+    border-radius: 18px;
+    opacity: 0.5;
+}
+
+.nav-icon {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    /* Subtle outline to help visibility */
+    text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.5);
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+.nav-icon:hover {
+    transform: scale(1.2);
+    color: #000;
+}
+
+.nav-icon:focus,
+.nav-icon:active {
+    background: transparent;
+    outline: none;
+    transform: scale(1.2);
+}
+
+/* Dark section style - only change navbar background */
+.dark-section {
+    background: rgba(50, 50, 50, 0.7);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(100, 100, 100, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Adjust icon color when on dark sections */
+.dark-section .nav-icon {
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
+.dark-section .nav-icon:hover {
+    color: #fff;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 300,
+        'GRAD' 0,
+        'opsz' 24;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-content {
+    position: relative;
+    z-index: 1000;
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    background-color: white;
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu.visible {
+    transform: translateX(0);
 }

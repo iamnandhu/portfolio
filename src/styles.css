@@ -17,6 +17,12 @@ body {
     font-family: "Inter", sans-serif;
     font-weight: 400;
     font-style: normal;
+    overflow-x: hidden;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+        overflow-x: hidden;
 }
 
 ::selection {
@@ -26,4 +32,44 @@ body {
 
 .no-scroll {
     overflow: hidden;
+}
+/* Basic z-index for navbar */
+.navbar {
+    z-index: 1000;
+}
+
+.hero-section {
+    z-index: 1;
+}
+
+.tech-card {
+    z-index: 2;
+    position: relative;
+}
+
+.project-card {
+    z-index: 2;
+    position: relative;
+}
+
+.experience-card {
+    z-index: 2;
+    position: relative;
+}
+
+.contact-form {
+    z-index: 2;
+    position: relative;
+}
+
+.footer {
+    z-index: 2;
+    position: relative;
+}
+
+/* Ensure sections are visible */
+section {
+    position: relative;
+    z-index: 1;
+    background-color: var(--background-color, #ffffff);
 }

@@ -1,5 +1,5 @@
-<div class="w-screen bg-black lg:my-[40px] my-[20pxlg:py-[60px] py-[30px]">
-    <div class="mx-auto max-w-[1440px] w-full px-4 lg:px-20 py-4 lg:py-6">
+<div class="w-full bg-black lg:my-[40px] my-[20px] lg:py-[60px] py-[30px]">
+    <div class="mx-auto max-w-[1400px] w-full px-4 lg:px-20 py-4 lg:py-6">
         <div class="w-full flex justify-center">
             <h1 class="text-white lg:text-[48px] text-[24px] lg:leading-[55px] leading-[30px]">My <span class="font-extrabold">Experience</span></h1>
         </div>
@@ -21,9 +21,11 @@
                 </div>
 
                 <div>
-                    <p class="text-zinc-300 text-14 leading-[22px] tracking-wide">
-                       {{item.desription}}
-                    </p>
+                    <ul class="list-disc pl-5 text-zinc-300">
+                        <li *ngFor="let point of getDescriptionPoints(item.desription)" class="text-14 leading-[22px] tracking-wide mb-2">
+                            {{point}}
+                        </li>
+                    </ul>
                 </div>
             </div>
 

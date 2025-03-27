@@ -25,7 +25,12 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "earcut",
+              "eventemitter3",
+              "pixi.js"
+            ]
           },
           "configurations": {
             "production": {
