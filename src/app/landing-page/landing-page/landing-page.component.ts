@@ -31,14 +31,16 @@ export class LandingPageComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-
   }
 
   scrollToComponent(componentId: string) {
     let element: ElementRef | undefined;
+    const navbarOffset = 64; // Standard offset for consistency
 
-    // Special case for top and home - we want to show the navbar
+    // Handle scroll to top
     if (componentId === 'top' || componentId === '') {
+      // Update URL fragment first (remove fragment)
+      this._router.navigate([], { fragment: undefined, replaceUrl: true });
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -46,20 +48,11 @@ export class LandingPageComponent implements OnInit {
       return;
     }
 
-    // Handle special case for home - scroll to home but leave space for navbar
-    if (componentId === 'home') {
-      element = this.homeComponent;
-      if (element && element.nativeElement) {
-        setTimeout(() => {
-          element?.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          window.scrollBy(0, -80); // Space for navbar
-        });
-      }
-      return;
-    }
-
-    // Handle other sections
+    // Determine the target element based on componentId
     switch (componentId) {
+      case 'home':
+        element = this.homeComponent;
+        break;
       case 'skills':
         element = this.skillsComponent;
         break;
@@ -74,30 +67,49 @@ export class LandingPageComponent implements OnInit {
         break;
     }
 
-    if (element && element.nativeElement) {
-      // Set current section immediately to prevent updateActiveSection from overriding
-      // This prevents the jumping behavior
+    // Proceed if the element exists
+    if (element?.nativeElement) {
+    // Set current section
       this.currentSection = componentId;
 
-      // Scroll to element
-      element.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Update URL fragment before scrolling
+      this._router.navigate([], {
+        fragment: componentId,
+        replaceUrl: true
+      });
 
-      // Apply offset, but wait a bit to make sure the scrolling has completed
-      setTimeout(() => {
-        window.scrollBy(0, -64); // Adjust for navbar/header
+      // Get the element's position
+      const elementTop = element.nativeElement.getBoundingClientRect().top + window.pageYOffset;
+      const targetScrollPosition = elementTop - navbarOffset;
 
-        // Update URL fragment directly rather than waiting for scroll detection
-        this._router.navigate([], {
-          fragment: componentId,
-          replaceUrl: true
-        });
-      }, 100);
+      // Use requestAnimationFrame for smoother animation
+      const startPosition = window.pageYOffset;
+      const distance = targetScrollPosition - startPosition;
+      const duration = 800; // Duration in milliseconds
+      let start: number | null = null;
+
+      const animation = (currentTime: number) => {
+        if (start === null) start = currentTime;
+        const timeElapsed = currentTime - start;
+        const progress = Math.min(timeElapsed / duration, 1);
+
+        // Easing function for smooth acceleration and deceleration
+        const easeInOutCubic = (t: number) => {
+          return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        };
+
+        window.scrollTo(0, startPosition + (distance * easeInOutCubic(progress)));
+
+        if (timeElapsed < duration) {
+          requestAnimationFrame(animation);
+        }
+      };
+
+      requestAnimationFrame(animation);
     }
   }
-
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }

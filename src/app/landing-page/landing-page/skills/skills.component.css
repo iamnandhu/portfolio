@@ -1,5 +1,5 @@
 .tech-card:hover {
-   background: #000;
+    background: #000;
 }
 
 .tech-card:hover p {
@@ -8,4 +8,797 @@
 
 .tech-card:hover i {
     color: #FFF;
+}
+/* Category selector styling */
+.category-selector {
+    position: relative;
+    z-index: 10;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling on iOS */
+    -ms-scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory;
+    padding: 5px 0;
+}
+
+.category-selector::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+}
+
+.category-button {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    border: 2px solid #000;
+    border-radius: 8px;
+    cursor: pointer;
+    min-width: 180px;
+    background: white;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    scroll-snap-align: center;
+}
+
+.category-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 5px 5px 0px #000;
+}
+
+.category-button.active {
+    background: #000;
+    transform: translateY(-5px);
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.category-button .number {
+    font-size: 12px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 4px;
+    transition: color 0.3s ease;
+}
+
+.category-button .title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.category-button.active .number,
+.category-button.active .title {
+    color: #fff;
+}
+
+.category-button .line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: #000;
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.category-button:hover .line,
+.category-button.active .line {
+    width: 100%;
+}
+
+/* Skills display area */
+.skills-display {
+    position: relative;
+    min-height: 400px;
+    z-index: 5;
+    border-radius: 12px;
+    background-color: #fafafa;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    perspective: 1000px;
+}
+
+/* Background grid pattern */
+.grid-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 1;
+}
+
+/* Category transitions */
+.skills-category {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    will-change: transform, opacity;
+}
+
+.skills-category.active-category {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Skills grid layout */
+.skills-hexgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 16px;
+    padding: 24px;
+    position: relative;
+}
+
+/* Skill item styling */
+.skill-item {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--animation-order, 0) * 50ms);
+    opacity: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 5;
+    will-change: opacity, transform;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.skill-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    padding: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.04);
+}
+
+.skill-item:hover .skill-content {
+    transform: translateY(-7px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 0, 0, 0.15);
+    background-color: #f9f9f9;
+}
+
+.skill-item.highlight .skill-content {
+    transform: translateY(-7px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 0, 0, 0.15);
+    background-color: #f9f9f9;
+}
+
+/* Icon and text styling */
+.skill-icon {
+    font-size: 35px;
+    color: #222;
+    transition: all 0.3s ease;
+    margin-bottom: 12px;
+}
+
+.skill-name {
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    color: #333;
+    transition: all 0.3s ease;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.skill-item:hover .skill-icon {
+    transform: scale(1.1);
+    color: #000;
+}
+
+.skill-item:hover .skill-name {
+    color: #000;
+}
+
+.skill-item.highlight .skill-icon {
+    transform: scale(1.1);
+    color: #000;
+}
+
+.skill-item.highlight .skill-name {
+    color: #000;
+}
+
+/* Hide connector lines - cleaner design */
+.connector-horizontal,
+.connector-vertical,
+.connector-diagonal {
+    display: none;
+}
+
+/* Remove the "Always Learning" category special styling */
+.skills-category[ng-reflect-ng-class*="Always Learning"] .skill-content {
+    display: none;
+}
+
+.skills-category[ng-reflect-ng-class*="Always Learning"] .skill-name {
+    display: none;
+}
+
+/* Remove the adaptability message styling */
+.adaptability-message {
+    display: none;
+}
+
+.adaptability-message span {
+    display: none;
+}
+
+.adaptability-message::before {
+    display: none;
+}
+
+.adaptability-message::after {
+    display: none;
+}
+
+.adaptability-message i {
+    display: none;
+}
+
+.adaptability-message b {
+    display: none;
+}
+
+/* Philosophy quote styling */
+.philosophy-quote {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 20px;
+}
+
+.philosophy-quote p {
+    font-style: italic;
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.philosophy-quote p::before,
+.philosophy-quote p::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 40px;
+}
+
+.philosophy-quote p::before {
+    top: 50%;
+    left: -60px;
+}
+
+.philosophy-quote p::after {
+    top: 50%;
+    right: -60px;
+}
+
+.quote-author {
+    font-size: 14px;
+    color: #888;
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .skills-display {
+        min-height: 350px;
+    }
+
+    .skills-hexgrid {
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+        gap: 12px;
+        padding: 20px;
+    }
+
+    .category-button {
+        min-width: auto;
+        padding: 8px;
+        min-width: 140px;
+    }
+
+    .category-button .title {
+        font-size: 14px;
+    }
+
+    .skill-icon {
+        font-size: 26px;
+        margin-bottom: 8px;
+    }
+
+    .skill-name {
+        font-size: 10px;
+    }
+
+    .adaptability-message {
+        bottom: 25px;
+        right: 25px;
+        font-size: 12px;
+        max-width: 220px;
+        padding: 15px 20px;
+        box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.9), 8px 8px 0 rgba(0, 0, 0, 0.8);
+    }
+
+    .philosophy-quote p {
+        font-size: 14px;
+    }
+
+    .philosophy-quote p::before,
+    .philosophy-quote p::after {
+        width: 20px;
+    }
+
+    .philosophy-quote p::before {
+        left: -30px;
+    }
+
+    .philosophy-quote p::after {
+        right: -30px;
+    }
+
+    .quote-author {
+        font-size: 12px;
+    }
+
+    /* Remove skills grid swipe arrows */
+    .skills-hexgrid::before,
+    .skills-hexgrid::after {
+        display: none;
+    }
+
+    /* Add dynamic category navigation indicator */
+    .category-navigation-indicator {
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 30px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0.8;
+        pointer-events: none;
+        z-index: 20;
+        animation: bounce 1.5s infinite;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        padding: 5px;
+    }
+
+    /* Next category indicator (left arrow) - show when not on last category */
+    .category-navigation-indicator.next {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(0,0,0,0.8)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5l7 7-7 7'/%3E%3C/svg%3E");
+    }
+
+    /* Previous category indicator (right arrow) - show when not on first category */
+    .category-navigation-indicator.prev {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(0,0,0,0.8)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 19l-7-7 7-7'/%3E%3C/svg%3E");
+    }
+
+    /* Remove the original category hint arrow */
+    .category-selector::after {
+        display: none;
+    }
+
+    @keyframes bounce {
+
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        40% {
+            transform: translateX(-50%) translateY(-5px);
+        }
+
+        60% {
+            transform: translateX(-50%) translateY(-2px);
+        }
+    }
+
+    /* Improve touch experience */
+    .skills-hexgrid,
+    .category-selector {
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        scrollbar-width: none;
+        touch-action: auto;
+    }
+
+    .skills-hexgrid::-webkit-scrollbar,
+    .category-selector::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Add a subtle transition effect when categories change */
+    .skills-category.active-category {
+        animation: none;
+    }
+
+    .category-selector {
+        padding: 10px 0;
+        margin: 0 auto;
+        max-width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+    }
+
+    .category-button {
+        scroll-snap-align: center;
+        flex-shrink: 0;
+    }
+
+    /* Fix the conflicting mobile slideIn animation */
+    .skills-category.active-category {
+        animation: none;
+    }
+
+    /* Position arrows better for mobile */
+    .navigation-arrow {
+        top: -15px;
+    }
+
+    .navigation-arrow-left {
+        left: 0px;
+    }
+
+    .navigation-arrow-right {
+        right: 0px;
+    }
+
+    /* Remove old navigation indicator */
+    .category-navigation-indicator {
+        display: none;
+    }
+
+    /* Disable hover/touch animations on mobile */
+    .skill-item:hover .skill-content,
+    .skill-item.highlight .skill-content {
+        transform: none;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.04);
+        border-color: rgba(0, 0, 0, 0.08);
+        background-color: white;
+    }
+
+    .skill-item:hover .skill-icon,
+    .skill-item.highlight .skill-icon {
+        transform: none;
+        color: #222;
+    }
+
+    .skill-item:hover .skill-name,
+    .skill-item.highlight .skill-name {
+        color: #333;
+    }
+
+    .skill-content {
+        transform: none !important;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.04) !important;
+        border-color: rgba(0, 0, 0, 0.08) !important;
+        background-color: white !important;
+    }
+
+    .skill-icon {
+        transform: none !important;
+        color: #222 !important;
+    }
+
+    .skill-name {
+        color: #333 !important;
+    }
+}
+
+/* Remove the existing slideIn animation and use a new horizontal slide animation system */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+}
+
+/* Category selector wrapper for arrow positioning */
+.category-selector-wrapper {
+    position: relative;
+}
+
+/* Side navigation arrows */
+.navigation-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: all 0.2s ease;
+}
+
+.navigation-arrow:hover {
+    opacity: 1;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.navigation-arrow-left {
+    left: -10px;
+}
+
+.navigation-arrow-right {
+    right: -10px;
+}
+
+.navigation-arrow .material-icons {
+    font-size: 18px;
+    color: #000;
+}
+
+/* First-time swipe guide for mobile */
+.swipe-guide {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInGuide 0.5s ease-in-out forwards;
+}
+
+.swipe-guide-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    max-width: 250px;
+    animation: pulseGuide 2s infinite;
+    border: 2px solid #000;
+}
+
+.swipe-guide p {
+    margin: 15px 0 0;
+    font-weight: 600;
+    font-size: 18px;
+    color: #000;
+}
+
+.swipe-icon {
+    font-size: 40px;
+    color: #414141;
+    animation: swipeMotion 1.5s infinite;
+    display: block;
+    margin: 0 auto;
+}
+
+@keyframes fadeInGuide {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulseGuide {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes swipeMotion {
+    0% {
+        transform: translateX(-5px);
+        opacity: 0.8;
+    }
+
+    25% {
+        transform: translateX(5px);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateX(5px);
+        opacity: 0.8;
+    }
+
+    75% {
+        transform: translateX(-5px);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateX(-5px);
+        opacity: 0.8;
+    }
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+/* Fixed swipe guide overlay */
+.fixed-swipe-guide {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fixed-swipe-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    max-width: 250px;
+    animation: pulseGuide 2s infinite;
+    border: 2px solid #000;
+}
+
+.fixed-swipe-content .material-icons {
+    font-size: 40px;
+    color: #000;
+    animation: swipeMotion 1.5s infinite;
+    display: block;
+    margin: 0 auto;
+}
+
+.fixed-swipe-content p {
+    margin: 15px 0 0;
+    font-weight: 600;
+    font-size: 18px;
+    color: #393939;
+}
+
+/* Subtle swipe hint */
+.swipe-hint {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 1000;
+    white-space: nowrap;
+    animation: fadeInOut 3s infinite;
+    background-color: transparent;
+    padding: 8px;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+}
+
+.swipe-hint .material-icons {
+    font-size: 18px;
+    animation: swipeMotion 1.5s infinite;
+    display: inline-block;
+    min-width: 20px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.swipe-hint .swipe-text {
+    position: relative;
+    display: inline-block;
+}
+
+/* Hide swipe hint on desktop */
+@media (min-width: 769px) {
+    .swipe-hint {
+        display: none !important;
+    }
 }

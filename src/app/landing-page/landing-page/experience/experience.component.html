@@ -21,9 +21,11 @@
                 </div>
 
                 <div>
-                    <ul class="list-disc pl-5 text-zinc-300">
-                        <li *ngFor="let point of getDescriptionPoints(item.desription)" class="text-14 leading-[22px] tracking-wide mb-2">
-                            {{point}}
+                    <ul class="pl-5 text-zinc-300">
+                        <li *ngFor="let point of getDescriptionPoints(item.desription)"
+                            class="text-14 leading-[22px] tracking-wide mb-2 flex">
+                            <span class="inline-block mr-2 text-zinc-300">•</span>
+                            <span>{{point}}</span>
                         </li>
                     </ul>
                 </div>

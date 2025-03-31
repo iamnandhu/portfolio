@@ -18,11 +18,11 @@ body {
     font-weight: 400;
     font-style: normal;
     overflow-x: hidden;
-    }
-    
-    html {
-        scroll-behavior: smooth;
-        overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 ::selection {
@@ -35,7 +35,7 @@ body {
 }
 /* Basic z-index for navbar */
 .navbar {
-    z-index: 1000;
+    z-index: 1001;
 }
 
 .hero-section {
