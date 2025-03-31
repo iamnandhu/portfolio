@@ -1,38 +1,69 @@
-<div class="mx-auto max-w-[1440px] w-full lg:my-9 my-4 px-4 lg:px-20 py-4 lg:py-6 flex flex-col lg:gap-[60px] gap-[40px]">
-    <div class="w-full flex justify-center">
-        <h1 class="lg:text-[48px] text-[24px] lg:leading-[55px] leading-[30px]">My <span class="font-[800]">Skills</span></h1>
+<div class="skills-container mx-auto max-w-[1400px] w-full py-6 px-4 lg:px-20 relative">
+    <div class="w-full flex justify-center mb-3">
+        <h1 class="lg:text-[48px] text-[24px] lg:leading-[55px] leading-[30px]">My <span
+                class="font-[800]">Skills</span></h1>
     </div>
 
-    <div class="flex flex-wrap lg:justify-between justify-center flex-1 md:gap-[30px] gap-[14px] w-full">
+    <div class="w-full flex justify-center mb-6">
+        <div class="philosophy-quote text-center">
+            <p>"Tech stacks change. Solid engineering doesn't."</p>
+            <span class="quote-author">— Me (because someone had to say it)</span>
+        </div>
+    </div>
+
+    <!-- Category selector -->
+    <div class="flex flex-col md:flex-row gap-6">
+        <div class="category-selector-wrapper relative md:w-1/4">
+            <!-- Left navigation arrow - only show on mobile when not on first category -->
+            <div *ngIf="isMobile && activeCategory !== skillCategories[0].title"
+                class="navigation-arrow navigation-arrow-left" (click)="navigateToPreviousCategory()">
+                <span class="material-icons">chevron_left</span>
+            </div>
+            <!-- Right navigation arrow - only show on mobile when not on last category -->
+            <div *ngIf="isMobile && activeCategory !== skillCategories[skillCategories.length-1].title"
+                class="navigation-arrow navigation-arrow-right" (click)="navigateToNextCategory()">
+                <span class="material-icons">chevron_right</span>
+            </div>
+            <div class="category-selector w-full flex flex-row md:flex-col gap-3 overflow-x-auto md:overflow-visible pb-3 md:pb-0 relative"
+                #categoryContainer>
+                <div *ngFor="let category of skillCategories; let i = index" class="category-button relative"
+                    [class.active]="activeCategory === category.title" (click)="setActiveCategory(category.title)"
+                    [id]="'category-' + category.title">
+                    <span class="number">0{{i+1}}</span>
+                    <span class="title">{{ category.title }}</span>
+                    <span class="line"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills display area -->
+        <div class="skills-display md:w-3/4 relative overflow-hidden" (touchstart)="onSkillsGridTouchStart($event)"
+            (touchend)="onSkillsGridTouchEnd($event)">
         
-        <div class="tech-card flex flex-col items-center justify-center gap-[14px] border-2 border-[#000] rounded-[5px] md:w-[186px] md:h-[186px] w-[150px] h-[150px]">
-            <i class="devicon-javascript-plain text-[50px]"></i>
-            <p class="text-[12px] font-[500] font-roboto">JavaScript</p>
-        </div>
+            <!-- Swipe hint for mobile - subtle version -->
+            <div *ngIf="isMobile && showGuide" class="swipe-hint">
+                <span class="material-icons">swipe</span>
+                <span class="swipe-text">swipe</span>
+            </div>
+            <!-- Background grid pattern -->
+            <div class="grid-pattern"></div>
 
-        <div class="tech-card flex flex-col items-center justify-center gap-[14px] border-2 border-[#000] rounded-[5px] md:w-[186px] md:h-[186px] w-[150px] h-[150px]">
-            <i class="devicon-typescript-plain text-[50px]"></i>
-            <p class="text-[12px] font-[500] font-roboto">TypeScript</p>
-        </div>
-
-        <div class="tech-card flex flex-col items-center justify-center gap-[14px] border-2 border-[#000] rounded-[5px] md:w-[186px] md:h-[186px] w-[150px] h-[150px]">
-            <i class="devicon-angularjs-plain text-[50px]"></i>
-            <p class="text-[12px] font-[500] font-roboto">Angular Js</p>
-        </div>
-
-        <div class="tech-card flex flex-col items-center justify-center gap-[14px] border-2 border-[#000] rounded-[5px] md:w-[186px] md:h-[186px] w-[150px] h-[150px]">
-            <i class="devicon-react-original text-[50px]"></i>
-            <p class="text-[12px] font-[500] font-roboto">React Js</p>
-        </div>
-
-        <div class="tech-card flex flex-col items-center justify-center gap-[14px] border-2 border-[#000] rounded-[5px] md:w-[186px] md:h-[186px] w-[150px] h-[150px]">
-            <i class="devicon-git-plain text-[50px]"></i>
-            <p class="text-[12px] font-[500] font-roboto">Git</p>
-        </div>
-
-        <div class="tech-card flex flex-col items-center justify-center gap-[14px] border-2 border-[#000] rounded-[5px] md:w-[186px] md:h-[186px] w-[150px] h-[150px]">
-            <i class="devicon-python-plain text-[50px]"></i>
-            <p class="text-[12px] font-[500] font-roboto">Python</p>
-        </div>        
+            <!-- Skills content -->
+            <div *ngFor="let category of skillCategories" [class.active-category]="activeCategory === category.title"
+                class="skills-category absolute top-0 left-0 w-full h-full">
+            
+                <!-- Clean grid layout -->
+                <div class="skills-hexgrid">
+                    <div *ngFor="let skill of category.skills; let i = index" class="skill-item" [style.--animation-order]="i"
+                        [class.highlight]="isHovered(skill.name)" (mouseenter)="setHoveredSkill(skill.name)"
+                        (mouseleave)="setHoveredSkill(null)">
+                        <div class="skill-content">
+                            <i [class]="skill.icon + ' skill-icon'"></i>
+                            <span class="skill-name">{{ skill.name }}</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
     </div>
 </div>

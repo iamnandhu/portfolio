@@ -1,67 +1,187 @@
 <div class="max-w-screen w-full">
-    <div class="relative mx-auto max-w-[1440px] w-full lg:px-[80px] px-[16px] lg:py-[24px] py-[16px]">
+    <div class="relative mx-auto max-w-[1400px] w-full lg:px-[80px] px-[16px] lg:py-[24px] py-[16px]">
         <div class="lg:px-[32px] px-0 flex justify-between items-center w-full">
-            <button class="flex gap-1 items-start z-[5]">
-                <span class="material-symbols-outlined md:text-22 text-18 md:leading-[24px] leading-[20px] font-[600]">developer_mode_tv</span>
-                <h1 class="md:text-18 text-14 font-[800] md:leading-[24px] leading-[20px]">NANDHU</h1>
+            <button class="flex items-center gap-2 z-[5]">
+                <span class="material-symbols-outlined text-20 leading-[24px] font-[500]">data_object</span>
+                <h1 class="md:text-16 text-14 font-[800] md:leading-[20px] leading-[18px] tracking-wider">NANDHU</h1>
             </button>
 
             <ul class="md:flex hidden items-center gap-[32px] text-16 font-[500] leading-[22px] font-roboto">
                 <li>
-                    <a [routerLink]=" '/about' "  [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'about'}" (click)="clickedMenu = 'about'">About Me</a>
+                    <a [routerLink]="[]" fragment="skills" (click)="scrollToComponent('skills')"
+                        class="flex items-center gap-2">
+                        <span class="material-symbols-outlined">code</span>
+                        <span>Skills</span>
+                    </a>
                 </li>
 
                 <li>
-                    <a [routerLink]=" '/skills' "  [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'skills'}" (click)="clickedMenu = 'skills'">Skills</a>
+                    <a [routerLink]="[]" fragment="experiences" (click)="scrollToComponent('experiences')"
+                        class="flex items-center gap-2">
+                        <span class="material-symbols-outlined">work</span>
+                        <span>Experience</span>
+                    </a>
                 </li>
 
                 <li>
-                    <a [routerLink]=" '/projects' "  [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'projects'}" (click)="clickedMenu = 'projects'">Projects</a>
+                    <a [routerLink]="[]" fragment="projects" (click)="scrollToComponent('projects')"
+                        class="flex items-center gap-2">
+                        <span class="material-symbols-outlined">sdk</span>
+                        <span>Projects</span>
+                    </a>
                 </li>
 
                 <li>
-                    <a [routerLink]=" '/contact' "  [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'contact'}" (click)="clickedMenu = 'contact'">Contact Me</a>
+                    <a [routerLink]="[]" fragment="contact" (click)="scrollToComponent('contact')"
+                        class="flex items-center gap-2">
+                        <span class="material-symbols-outlined">mail</span>
+                        <span>Contact Me</span>
+                    </a>
                 </li>
             </ul>
 
-            <button class="md:flex hidden items-center gap-1 text-[#fff] bg-black rounded-[4px] text-14 leading-[22px] font-semibold px-[24px] py-[8px]">
+            <button
+                class="md:flex hidden items-center gap-1 text-[#fff] bg-black rounded-[4px] text-14 leading-[22px] font-semibold px-[24px] py-[8px]">
                 <h2>Resume</h2>
                 <span class="material-symbols-outlined">download</span>
             </button>
-        
-            <span class="material-symbols-outlined text-22 leading-[24px] navMenu font-[600] md:hidden block cursor-pointer" *ngIf="!flagMobileMenuDrawerVisible" (click)="toggleNavbar()">menu</span>
-            <span class="material-symbols-outlined text-22 leading-[24px] font-[600] md:hidden block cursor-pointer z-20" *ngIf="flagMobileMenuDrawerVisible" (click)="toggleNavbar()">close</span>
-            
-            <div  class="mobileDrawer bg-white min-h-screen w-[250px] absolute right-0 top-0 z-10 px-[32px] flex flex-col gap-[24px] overflow-hidden" [@openClose]="flagMobileMenuDrawerVisible ? 'open' : 'closed'" *ngIf="flagMobileMenuDrawerVisible">
 
-                <ul class="flex flex-col justify-center gap-[32px] text-14 font-[500] leading-[20px] font-roboto align-middle mt-10" [@fadeInOut]>
+            <!-- Menu button with explicit text and higher weight for better visibility on iOS -->
+            <button *ngIf="!flagMobileMenuDrawerVisible" (click)="toggleNavbar(); $event.stopPropagation()"
+                class="md:hidden flex items-center justify-center w-10 h-10 rounded-md hover:bg-gray-50 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="h-5 w-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
 
-                    <li>
-                        <button class="flex items-center gap-1 text-[#fff] bg-black rounded-[4px] text-14 leading-[22px] font-semibold px-[24px] py-[8px] w-fit">
-                            <h2>Resume</h2>
-                            <span class="material-symbols-outlined">download</span>
-                        </button>
-                    </li>
+            <!-- Close button with explicit SVG for iOS compatibility -->
+            <button *ngIf="flagMobileMenuDrawerVisible" (click)="toggleNavbar(); $event.stopPropagation()"
+                class="md:hidden flex items-center justify-center w-10 h-10 rounded-md z-[1003] hover:bg-gray-50 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="h-5 w-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+            <div class="mobileDrawer bg-white min-h-screen w-[300px] absolute right-0 top-0 z-[2000] flex flex-col overflow-hidden backdrop-blur-xl border-l border-gray-200"
+                [@openClose]="flagMobileMenuDrawerVisible ? 'open' : 'closed'" *ngIf="flagMobileMenuDrawerVisible"
+                (click)="$event.stopPropagation()">
+                <!-- Sleek minimal header with close button -->
+                <div class="flex justify-between items-center px-8 py-7 border-b border-gray-100">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-18 leading-[20px] font-[500]">data_object</span>
+                        <h1 class="text-16 font-[800] leading-[20px] tracking-wider">NANDHU</h1>
+                    </div>
+                    <button (click)="toggleNavbar(); $event.stopPropagation()"
+                        class="flex items-center justify-center w-8 h-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            class="h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
 
-                    <li>
-                        <a [routerLink]=" '/about' " [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'about'}" (click)="clickedMenu = 'about'">About Me</a>
-                    </li>
-    
-                    <li>
-                        <a [routerLink]=" '/skills' " [routerLinkActive]=" 'active' " [ngClass]="{'active': clickedMenu === 'skills'}" (click)="clickedMenu = 'skills'">Skills</a>
-                    </li>
-    
-                    <li>
-                        <a [routerLink]=" '/projects' " [ngClass]="{'active': clickedMenu === 'projects'}" (click)="clickedMenu = 'projects'">Projects</a>
-                    </li>
-    
-                    <li>
-                        <a [routerLink]=" '/contact' " [ngClass]="{'active': clickedMenu === 'contact'}" (click)="clickedMenu = 'contact'">Contact Me</a>
-                    </li>
-                </ul>
+                <!-- Clean minimal navigation links -->
+                <div class="flex flex-col px-8 py-8">
+                    <!-- Resume button at the top of navigation -->
+                    <button
+                        class="flex items-center justify-center gap-2 text-[#fff] bg-black rounded-[4px] text-14 leading-[22px] font-semibold px-[24px] py-[10px] w-full mb-6 hover:shadow-lg transition-all shadow-md">
+                        <span>Resume</span>
+                        <span class="material-symbols-outlined text-[18px]">download</span>
+                    </button>
+                    <ul class="flex flex-col gap-6 text-16 font-[500] leading-[24px] font-roboto" [@fadeInStagger]>
+                        <li>
+                            <a [routerLink]="[]" fragment="skills" (click)="scrollToComponent('skills')"
+                                class="flex items-center gap-3 py-2.5 px-3">
+                                <span class="material-symbols-outlined">code</span>
+                                <span>Skills</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="[]" fragment="experiences" (click)="scrollToComponent('experiences')"
+                                class="flex items-center gap-3 py-2.5 px-3">
+                                <span class="material-symbols-outlined">work</span>
+                                <span>Experience</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="[]" fragment="projects" (click)="scrollToComponent('projects')"
+                                class="flex items-center gap-3 py-2.5 px-3">
+                                <span class="material-symbols-outlined">sdk</span>
+                                <span>Projects</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="[]" fragment="contact" (click)="scrollToComponent('contact')"
+                                class="flex items-center gap-3 py-2.5 px-3">
+                                <span class="material-symbols-outlined">mail</span>
+                                <span>Contact Me</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
+                <!-- Remove the Resume button at the bottom -->
+                <div class="mt-auto px-8 py-8 border-t border-gray-100 hidden">
+                    <button
+                        class="flex items-center justify-center gap-2 text-[#fff] bg-black rounded-[4px] text-14 leading-[22px] font-semibold px-[24px] py-[10px] w-full">
+                        <span>Resume</span>
+                        <span class="material-symbols-outlined text-[18px]">download</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-    
+
+</div>
+<!-- Floating Glassmorphic Navbar - ONLY VISIBLE ON DESKTOP -->
+<div [@floatingNavbar]="isScrolled ? 'visible' : 'hidden'"
+    class="fixed right-2 top-[45%] transform -translate-y-1/2 z-50 hidden md:block">
+    <ul class="flex flex-col items-center gap-5 p-4 floating-navbar" [ngClass]="{'dark-section': isExperienceSection}">
+        <li class="w-10 h-10">
+            <button (click)="scrollToTop()"
+                class="nav-icon w-full h-full focus:outline-none active:outline-none active:bg-transparent"
+                [ngClass]="{'active-nav-icon': currentSection === ''}" title="Back to Top">
+                <span class="material-symbols-outlined">arrow_upward</span>
+            </button>
+        </li>
+        <li class="w-10 h-10">
+            <a [routerLink]="[]" fragment="skills" (click)="scrollToComponent('skills')"
+                class="nav-icon focus:outline-none active:outline-none active:bg-transparent"
+                [ngClass]="{'active-nav-icon': currentSection === 'skills'}" title="Skills">
+                <span class="material-symbols-outlined">code</span>
+            </a>
+        </li>
+        <li class="w-10 h-10">
+            <a [routerLink]="[]" fragment="experiences" (click)="scrollToComponent('experiences')"
+                class="nav-icon focus:outline-none active:outline-none active:bg-transparent"
+                [ngClass]="{'active-nav-icon': currentSection === 'experiences'}" title="Experience">
+                <span class="material-symbols-outlined">work</span>
+            </a>
+        </li>
+        <li class="w-10 h-10">
+            <a [routerLink]="[]" fragment="projects" (click)="scrollToComponent('projects')"
+                class="nav-icon focus:outline-none active:outline-none active:bg-transparent"
+                [ngClass]="{'active-nav-icon': currentSection === 'projects'}" title="Projects">
+                <span class="material-symbols-outlined">sdk</span>
+            </a>
+        </li>
+        <li class="w-10 h-10">
+            <a [routerLink]="[]" fragment="contact" (click)="scrollToComponent('contact')"
+                class="nav-icon focus:outline-none active:outline-none active:bg-transparent"
+                [ngClass]="{'active-nav-icon': currentSection === 'contact'}" title="Contact">
+                <span class="material-symbols-outlined">mail</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- Mobile Scroll To Top Button - ONLY VISIBLE ON MOBILE -->
+<div [@floatingNavbar]="isScrolled ? 'visible' : 'hidden'" class="fixed bottom-8 right-6 z-50 md:hidden">
+    <button (click)="scrollToTop()"
+        class="w-12 h-12 bg-white text-black rounded-full shadow-lg flex items-center justify-center transition-transform transform hover:scale-110 active:scale-95 border-2 border-black">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
 </div>
