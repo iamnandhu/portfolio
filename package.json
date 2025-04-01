@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && node replace-env-vars.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -18,7 +18,9 @@
     "@angular/platform-browser": "^17.3.12",
     "@angular/platform-browser-dynamic": "^17.3.12",
     "@angular/router": "^17.3.12",
+    "@emailjs/browser": "^4.4.1",
     "@pixi/sound": "^6.0.1",
+    "emailjs-com": "^3.2.0",
     "material-icons": "^1.13.12",
     "material-symbols": "^0.16.0",
     "rxjs": "~7.5.0",
