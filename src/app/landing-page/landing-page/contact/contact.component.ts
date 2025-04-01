@@ -74,7 +74,9 @@ export class ContactComponent implements OnInit {
       from_name: this.f['name'].value,
       from_email: this.f['email'].value,
       message: this.f['message'].value,
-      to_email: 'nandhus1810@gmail.com'
+      to_name: 'Portfolio Contact',
+      to_email: 'nandhus1810@gmail.com',
+      reply_to: this.f['email'].value
     };
 
     console.log('Sending email with params:', {
