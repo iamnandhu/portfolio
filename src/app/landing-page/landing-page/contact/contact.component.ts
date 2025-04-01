@@ -53,6 +53,11 @@ export class ContactComponent implements OnInit {
 
     // Check if environment variables are set
     if (!this.SERVICE_ID || !this.TEMPLATE_ID || !this.PUBLIC_KEY) {
+      console.error('EmailJS configuration missing. Contact form will not work!', {
+        serviceId: this.SERVICE_ID ? 'Set' : 'Missing',
+        templateId: this.TEMPLATE_ID ? 'Set' : 'Missing',
+        publicKey: this.PUBLIC_KEY ? 'Set' : 'Missing'
+      });
       this.error = true;
       this.loading = false;
       return;
@@ -69,6 +74,7 @@ export class ContactComponent implements OnInit {
     // Send email using EmailJS
     emailjs.send(this.SERVICE_ID, this.TEMPLATE_ID, templateParams)
       .then((response) => {
+        console.log('Email sent successfully:', response.status);
         this.success = true;
         this.loading = false;
         this.contactForm.reset();
@@ -79,6 +85,7 @@ export class ContactComponent implements OnInit {
           this.success = false;
         }, 5000);
       }, (err) => {
+        console.error('Email sending failed:', err);
         this.error = true;
         this.loading = false;
       });

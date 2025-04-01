@@ -5,35 +5,30 @@ const envFiles = [
   './dist/portfolio/assets/env.js'
 ];
 
-// Function to replace placeholders with environment variables
-function replacePlaceholders(content) {
-  // Define replacements with actual environment variables
-  const replacements = {
-    'INJECT_NG_APP_EMAILJS_SERVICE_ID': process.env.NG_APP_EMAILJS_SERVICE_ID || '',
-    'INJECT_NG_APP_EMAILJS_TEMPLATE_ID': process.env.NG_APP_EMAILJS_TEMPLATE_ID || '',
-    'INJECT_NG_APP_EMAILJS_PUBLIC_KEY': process.env.NG_APP_EMAILJS_PUBLIC_KEY || ''
-  };
+// Output environment variables for debugging (will only show in build logs)
+console.log('Environment variables in build:');
+console.log('NG_APP_EMAILJS_SERVICE_ID present:', !!process.env.NG_APP_EMAILJS_SERVICE_ID);
+console.log('NG_APP_EMAILJS_TEMPLATE_ID present:', !!process.env.NG_APP_EMAILJS_TEMPLATE_ID);
+console.log('NG_APP_EMAILJS_PUBLIC_KEY present:', !!process.env.NG_APP_EMAILJS_PUBLIC_KEY);
 
-  // Perform replacements
-  let processedContent = content;
-  Object.entries(replacements).forEach(([placeholder, value]) => {
-    processedContent = processedContent.replace(new RegExp(placeholder, 'g'), value);
-  });
-
-  return processedContent;
-}
+// Direct replacement approach - avoids using placeholders
+const envJsContent = `(function(window) {
+  window.env = window.env || {};
+  window.env['NG_APP_EMAILJS_SERVICE_ID'] = '${process.env.NG_APP_EMAILJS_SERVICE_ID || ""}';
+  window.env['NG_APP_EMAILJS_TEMPLATE_ID'] = '${process.env.NG_APP_EMAILJS_TEMPLATE_ID || ""}';
+  window.env['NG_APP_EMAILJS_PUBLIC_KEY'] = '${process.env.NG_APP_EMAILJS_PUBLIC_KEY || ""}';
+})(this);`;
 
 // Process each file
 envFiles.forEach(filePath => {
   if (fs.existsSync(filePath)) {
     try {
-      const content = fs.readFileSync(filePath, 'utf8');
-      const processedContent = replacePlaceholders(content);
-      fs.writeFileSync(filePath, processedContent, 'utf8');
+      fs.writeFileSync(filePath, envJsContent, 'utf8');
+      console.log(`Updated ${filePath} directly with environment values`);
     } catch (error) {
-      // Silent error handling
+      console.error(`Error updating ${filePath}:`, error);
     }
+  } else {
+    console.warn(`File not found: ${filePath}`);
   }
-});
-
-console.log('✅ Environment variable processing complete'); 
+}); 
