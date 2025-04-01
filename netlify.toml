@@ -10,8 +10,4 @@
 [[redirects]]
   from = "/*"
   to = "/index.html"
-  status = 200
-
-# Post-processing plugin
-[[plugins]]
-  package = "@netlify/plugin-inject-env-vars-in-html" 
+  status = 200 
