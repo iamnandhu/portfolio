@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HeroComponent } from './landing-page/hero/hero.component';
 import { SkillsComponent } from './landing-page/skills/skills.component';
@@ -21,6 +23,8 @@ import { LandingPageRoutingModule } from './landing-page-routing.module';
   imports: [
     CommonModule,
     RouterModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     LandingPageRoutingModule
   ]
 })

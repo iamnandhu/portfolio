@@ -9,6 +9,7 @@
 .tech-card:hover i {
     color: #FFF;
 }
+
 /* Category selector styling */
 .category-selector {
     position: relative;
@@ -146,7 +147,7 @@
 /* Skills grid layout */
 .skills-hexgrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 16px;
     padding: 24px;
     position: relative;
@@ -335,31 +336,41 @@
 @media (max-width: 768px) {
     .skills-display {
         min-height: 350px;
+        padding: 6px;
     }
 
     .skills-hexgrid {
-        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-        gap: 12px;
-        padding: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+            gap: 8px;
+            padding: 12px;
     }
 
     .category-button {
         min-width: auto;
-        padding: 8px;
-        min-width: 140px;
+        padding: 6px;
+            min-width: 110px;
     }
 
     .category-button .title {
-        font-size: 14px;
+        font-size: 13px;
+        }
+        
+        .skill-content {
+            transform: none !important;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.04) !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+            background-color: white !important;
+            padding: 6px;
     }
-
+    
     .skill-icon {
-        font-size: 26px;
-        margin-bottom: 8px;
+        font-size: 22px;
+            margin-bottom: 6px;
     }
-
+    
     .skill-name {
-        font-size: 10px;
+        font-size: 9px;
+            line-height: 1.2;
     }
 
     .adaptability-message {
@@ -392,13 +403,11 @@
         font-size: 12px;
     }
 
-    /* Remove skills grid swipe arrows */
     .skills-hexgrid::before,
     .skills-hexgrid::after {
         display: none;
     }
 
-    /* Add dynamic category navigation indicator */
     .category-navigation-indicator {
         position: absolute;
         top: -25px;
@@ -418,23 +427,19 @@
         padding: 5px;
     }
 
-    /* Next category indicator (left arrow) - show when not on last category */
     .category-navigation-indicator.next {
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(0,0,0,0.8)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5l7 7-7 7'/%3E%3C/svg%3E");
     }
 
-    /* Previous category indicator (right arrow) - show when not on first category */
     .category-navigation-indicator.prev {
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(0,0,0,0.8)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 19l-7-7 7-7'/%3E%3C/svg%3E");
     }
 
-    /* Remove the original category hint arrow */
     .category-selector::after {
         display: none;
     }
 
-    @keyframes bounce {
-
+                @keyframes bounce {
         0%,
         20%,
         50%,
@@ -452,7 +457,6 @@
         }
     }
 
-    /* Improve touch experience */
     .skills-hexgrid,
     .category-selector {
         -webkit-overflow-scrolling: touch;
@@ -466,7 +470,6 @@
         display: none;
     }
 
-    /* Add a subtle transition effect when categories change */
     .skills-category.active-category {
         animation: none;
     }
@@ -486,12 +489,10 @@
         flex-shrink: 0;
     }
 
-    /* Fix the conflicting mobile slideIn animation */
     .skills-category.active-category {
         animation: none;
     }
 
-    /* Position arrows better for mobile */
     .navigation-arrow {
         top: -15px;
     }
@@ -504,12 +505,10 @@
         right: 0px;
     }
 
-    /* Remove old navigation indicator */
     .category-navigation-indicator {
         display: none;
     }
 
-    /* Disable hover/touch animations on mobile */
     .skill-item:hover .skill-content,
     .skill-item.highlight .skill-content {
         transform: none;
@@ -534,6 +533,7 @@
         box-shadow: 0 8px 15px rgba(0, 0, 0, 0.04) !important;
         border-color: rgba(0, 0, 0, 0.08) !important;
         background-color: white !important;
+        padding: 10px;
     }
 
     .skill-icon {
@@ -544,6 +544,10 @@
     .skill-name {
         color: #333 !important;
     }
+                .skills-container {
+                    padding-left: 8px;
+                    padding-right: 8px;
+                }
 }
 
 /* Remove the existing slideIn animation and use a new horizontal slide animation system */
