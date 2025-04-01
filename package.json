@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build && node replace-env-vars.js",
+    "prebuild": "node prebuild.js",
+    "build": "ng build",
+    "postbuild": "node replace-env-vars.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
