@@ -1,22 +1,16 @@
 const fs = require('fs');
 const path = './dist/portfolio/assets/env.js';
 
-const replacements = {
-  '__EMAILJS_SERVICE_ID__': process.env.NG_APP_EMAILJS_SERVICE_ID || '',
-  '__EMAILJS_TEMPLATE_ID__': process.env.NG_APP_EMAILJS_TEMPLATE_ID || '',
-  '__EMAILJS_PUBLIC_KEY__': process.env.NG_APP_EMAILJS_PUBLIC_KEY || ''
-};
+// Create an env.js that doesn't contain the actual values
+// but just creates the structure - values will be injected at runtime
+const envFileContent = `(function(window) {
+  window.env = window.env || {};
+  window.env['NG_APP_EMAILJS_SERVICE_ID'] = '';
+  window.env['NG_APP_EMAILJS_TEMPLATE_ID'] = '';
+  window.env['NG_APP_EMAILJS_PUBLIC_KEY'] = '';
+})(this);`;
 
-fs.readFile(path, 'utf8', function(err, data) {
-  if (err) return console.error('Failed to read env.js', err);
-
-  let result = data;
-  Object.entries(replacements).forEach(([placeholder, value]) => {
-    result = result.replace(placeholder, value);
-  });
-
-  fs.writeFile(path, result, 'utf8', function(err) {
-    if (err) return console.error('Failed to write env.js', err);
-    console.log('✅ env.js updated with Netlify env variables');
-  });
+fs.writeFile(path, envFileContent, 'utf8', function(err) {
+  if (err) return console.error('Failed to write env.js', err);
+  console.log('✅ env.js created successfully');
 }); 

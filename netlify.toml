@@ -1,6 +1,9 @@
 [build]
   command = "npm run build"
   publish = "dist/portfolio"
+  
+[build.environment]
+  SECRETS_SCAN_OMIT_PATHS = "dist/portfolio/assets/env.js"
 
 # This ensures that all routes get routed to index.html for Angular's router to handle
 [[redirects]]

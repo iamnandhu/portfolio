@@ -25,6 +25,11 @@
                 "glob": "env.js",
                 "input": "src/assets/",
                 "output": "/assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "public/",
+                "output": "/"
               }
             ],
             "styles": [
