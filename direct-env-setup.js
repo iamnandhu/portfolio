@@ -8,11 +8,21 @@
 
 const fs = require('fs');
 
-// REPLACE THESE WITH YOUR ACTUAL VALUES IF OTHER APPROACHES FAIL
-// BUT BE CAUTIOUS ABOUT COMMITTING THIS FILE WITH ACTUAL VALUES
-const EMAIL_SERVICE_ID = ''; // Your EmailJS service ID
-const EMAIL_TEMPLATE_ID = ''; // Your EmailJS template ID 
-const EMAIL_PUBLIC_KEY = ''; // Your EmailJS public key
+// Try to get values from environment first, then fall back to hardcoded values
+const EMAIL_SERVICE_ID = process.env.NG_APP_EMAILJS_SERVICE_ID || ''; // Your EmailJS service ID
+const EMAIL_TEMPLATE_ID = process.env.NG_APP_EMAILJS_TEMPLATE_ID || ''; // Your EmailJS template ID 
+const EMAIL_PUBLIC_KEY = process.env.NG_APP_EMAILJS_PUBLIC_KEY || ''; // Your EmailJS public key
+
+// Check if we have values
+if (!EMAIL_SERVICE_ID || !EMAIL_TEMPLATE_ID || !EMAIL_PUBLIC_KEY) {
+  console.warn('⚠️ One or more EmailJS environment variables are missing:');
+  console.warn(`SERVICE_ID: ${EMAIL_SERVICE_ID ? '✅ Set' : '❌ Missing'}`);
+  console.warn(`TEMPLATE_ID: ${EMAIL_TEMPLATE_ID ? '✅ Set' : '❌ Missing'}`);
+  console.warn(`PUBLIC_KEY: ${EMAIL_PUBLIC_KEY ? '✅ Set' : '❌ Missing'}`);
+  console.warn('You should either:');
+  console.warn('1. Set them in your .env file or environment');
+  console.warn('2. Hardcode them in this file (NOT recommended for production/public repos)');
+}
 
 const envJsContent = `(function(window) {
   window.env = window.env || {};
@@ -43,4 +53,6 @@ directories.forEach(dir => {
 });
 
 console.log('✅ Direct environment setup complete');
-console.log('⚠️ Warning: This approach hardcodes values and should only be used for testing'); 
+if (!EMAIL_SERVICE_ID || !EMAIL_TEMPLATE_ID || !EMAIL_PUBLIC_KEY) {
+  console.log('⚠️ Warning: Some environment variables are empty, email functionality may not work');
+} 
