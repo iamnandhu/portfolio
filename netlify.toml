@@ -3,7 +3,7 @@
   publish = "dist/portfolio"
   
 [build.environment]
-  SECRETS_SCAN_OMIT_PATHS = "dist/portfolio/assets/env.js,dist/portfolio/assets/runtime-env.js"
+  SECRETS_SCAN_OMIT_PATHS = "dist/portfolio/assets/env.js"
   NODE_VERSION = "18"
 
 # This ensures that all routes get routed to index.html for Angular's router to handle
