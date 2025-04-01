@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist/portfolio"
+
+# This ensures that all routes get routed to index.html for Angular's router to handle
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200 
