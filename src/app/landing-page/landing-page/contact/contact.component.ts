@@ -25,18 +25,9 @@ export class ContactComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     
-    // Debug environment variables
-    console.log('Contact component environment variables:');
-    console.log('SERVICE_ID:', this.SERVICE_ID);
-    console.log('TEMPLATE_ID:', this.TEMPLATE_ID);
-    console.log('PUBLIC_KEY:', this.PUBLIC_KEY);
-    
     // Initialize EmailJS with your public key
     if (this.PUBLIC_KEY) {
       emailjs.init(this.PUBLIC_KEY);
-      console.log('EmailJS initialized');
-    } else {
-      console.error('EmailJS initialization failed: PUBLIC_KEY is empty');
     }
   }
 
@@ -62,8 +53,6 @@ export class ContactComponent implements OnInit {
 
     // Check if environment variables are set
     if (!this.SERVICE_ID || !this.TEMPLATE_ID || !this.PUBLIC_KEY) {
-      console.error('Email sending failed. Environment variables are not set properly:',
-        { service: this.SERVICE_ID, template: this.TEMPLATE_ID, publicKey: this.PUBLIC_KEY });
       this.error = true;
       this.loading = false;
       return;
@@ -71,24 +60,15 @@ export class ContactComponent implements OnInit {
 
     // Prepare template parameters for EmailJS
     const templateParams = {
-      from_name: this.f['name'].value,
-      from_email: this.f['email'].value,
+      name: this.f['name'].value,
+      email: this.f['email'].value,
       message: this.f['message'].value,
-      to_name: 'Portfolio Contact',
-      to_email: 'nandhus1810@gmail.com',
-      reply_to: this.f['email'].value
+      recipient: 'nandhus1810@gmail.com'
     };
-
-    console.log('Sending email with params:', {
-      service: this.SERVICE_ID,
-      template: this.TEMPLATE_ID,
-      params: templateParams
-    });
 
     // Send email using EmailJS
     emailjs.send(this.SERVICE_ID, this.TEMPLATE_ID, templateParams)
       .then((response) => {
-        console.log('SUCCESS!', response.status, response.text);
         this.success = true;
         this.loading = false;
         this.contactForm.reset();
@@ -99,7 +79,6 @@ export class ContactComponent implements OnInit {
           this.success = false;
         }, 5000);
       }, (err) => {
-        console.log('FAILED...', err);
         this.error = true;
         this.loading = false;
       });
