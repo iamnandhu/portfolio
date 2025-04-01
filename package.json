@@ -7,6 +7,8 @@
     "prebuild": "node prebuild.js",
     "build": "ng build",
     "postbuild": "node replace-env-vars.js",
+    "direct-env": "node direct-env-setup.js",
+    "build-direct": "node direct-env-setup.js && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
