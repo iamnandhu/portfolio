@@ -1,28 +1,35 @@
-<div class="resume-container">
-    <div class="actions">
-        <button class="back-button" [routerLink]="['/']">
+<div class="flex flex-col items-center p-5 min-h-screen bg-gray-100">
+    <div class="flex justify-between w-full max-w-3xl mb-5 actions">
+        <button
+            class="flex items-center gap-1 px-4 py-2 bg-gray-900 text-white rounded hover:bg-gray-700 hover:translate-y-[-2px] transition-all duration-300 shadow-sm hover:shadow-md back-button"
+            [routerLink]="['/']">
             <span class="material-symbols-outlined">arrow_back</span>
             Back to Home
         </button>
-        <button class="download-button" (click)="downloadResume()">
+        <button
+            class="flex items-center gap-1 px-4 py-2 bg-gray-900 text-white rounded hover:bg-gray-700 hover:translate-y-[-2px] transition-all duration-300 shadow-sm hover:shadow-md download-button"
+            (click)="downloadResume()">
             <span class="material-symbols-outlined">download</span>
             Download PDF
         </button>
     </div>
 
-    <div class="a4-container">
-        <div class="a4-sheet">
-            <div class="resume-header">
-                <h1>NANDHU S</h1>
-                <div class="contact-info">
+    <div class="w-full max-w-3xl shadow-lg">
+        <div class="w-full min-h-[1123px] p-10 bg-white rounded relative font-sans a4-sheet">
+            <div class="text-center mb-5">
+                <h1 class="text-2xl font-bold mb-2 tracking-wider">NANDHU S</h1>
+                <div class="text-sm leading-relaxed contact-info">
                     <p>+1(91) 7306531668 ⋄ Alappuzha, Kerala, IN</p>
-                    <p>nandhus1810&#64;gmail.com ⋄ linkedin.com/in/iamnandhu ⋄ https://nandhus.netlify.app/</p>
+                    <p>nandhus1810&#64;gmail.com ⋄
+                        <a href="https://linkedin.com/in/iamnandhu" class="underline text-inherit">LinkedIn</a> ⋄
+                        <a href="https://github.com/iamnandhu" class="underline text-inherit">GitHub</a>
+                    </p>
                 </div>
             </div>
 
-            <div class="resume-section">
-                <h2>OBJECTIVE</h2>
-                <p>
+            <div class="mb-5">
+                <h2 class="text-base font-bold text-gray-800 mb-2 pb-1 border-b border-gray-200 tracking-wide">OBJECTIVE</h2>
+                <p class="text-sm leading-relaxed">
                     Having over 2+ years of experience in backend development (Go/Python, gRPC/REST APIs) and frontend
                     engineering
                     (Angular/Tailwind CSS), I am seeking full-time roles in cybersecurity, cloud infrastructure, or
@@ -35,80 +42,92 @@
                 </p>
             </div>
 
-            <div class="resume-section">
-                <h2>EDUCATION</h2>
-                <div class="education-item">
-                    <div class="education-header">
-                        <h3>B.Tech. Computer Science and Engineering, APJ Abdul Kalam Technological Univeristy</h3>
-                        <span class="year">2022</span>
+            <div class="mb-5">
+                <h2 class="text-base font-bold text-gray-800 mb-2 pb-1 border-b border-gray-200 tracking-wide">EDUCATION</h2>
+                <div>
+                    <div class="flex justify-between items-baseline sm:flex-col sm:items-start">
+                        <h3 class="text-[15px] font-semibold sm:mb-1">B.Tech. Computer Science and Engineering, APJ Abdul Kalam
+                            Technological Univeristy</h3>
+                        <span class="text-sm font-normal">2022</span>
                     </div>
-                    <p>Relevant Coursework: Machine learning, Data Structures and Algorithms, Software engineering
+                    <p class="text-sm">Relevant Coursework: Machine learning, Data Structures and Algorithms, Software engineering
                         Principles, and lifecycle.</p>
                 </div>
             </div>
 
-            <div class="resume-section">
-                <h2>SKILLS</h2>
-                <div class="skills-list">
-                    <div class="skill-category">
-                        <h3>Technical:</h3>
-                        <p>Go, Python, JavaScript/TypeScript, gRPC, REST APIs, Angular, Tailwind CSS, AWS services,
+            <div class="mb-5">
+                <h2 class="text-base font-bold text-gray-800 mb-2 pb-1 border-b border-gray-200 tracking-wide">SKILLS</h2>
+                <div class="flex flex-col gap-2">
+                    <div class="flex items-baseline sm:flex-col sm:items-start">
+                        <h3 class="text-sm font-semibold mr-2 min-w-[80px] sm:mb-1">Technical:</h3>
+                        <p class="text-sm leading-relaxed m-0">Go, Python, JavaScript/TypeScript, gRPC, REST APIs, Angular, Tailwind
+                            CSS, AWS services,
                             Docker, Git, Linux, LLM Integration (OpenAI, Gemini)</p>
                     </div>
-                    <div class="skill-category">
-                        <h3>Soft:</h3>
-                        <p>Problem-solving, Adaptability, Ownership, Collaboration, Communication, Agile Methodologies
+                    <div class="flex items-baseline sm:flex-col sm:items-start">
+                        <h3 class="text-sm font-semibold mr-2 min-w-[80px] sm:mb-1">Soft:</h3>
+                        <p class="text-sm leading-relaxed m-0">Problem-solving, Adaptability, Ownership, Collaboration, Communication, Agile
+                            Methodologies
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="resume-section">
-                <h2>EXPERIENCE</h2>
-                <div class="experience-item">
-                    <div class="job-header">
-                        <h3>Software Engineer - Fullstack</h3>
-                        <span class="date">Jan 2023 - Present</span>
+            <div class="mb-5">
+                <h2 class="text-base font-bold text-gray-800 mb-2 pb-1 border-b border-gray-200 tracking-wide">EXPERIENCE</h2>
+                <div class="mb-4">
+                    <div class="flex justify-between items-baseline sm:flex-col sm:items-start">
+                        <h3 class="text-[15px] font-semibold sm:mb-1">Software Engineer - Fullstack</h3>
+                        <span class="text-sm font-normal">Jan 2023 - Present</span>
                     </div>
-                    <div class="company">Technisanct Kochi, Kerala, IN</div>
-                    <ul class="job-points">
-                        <li>Developed core features for falconfeeds.io, a B2C threat intelligence platform, contributing
+                    <div class="text-sm italic mb-2">Technisanct Kochi, Kerala, IN</div>
+                    <ul class="my-2 resume-job-content">
+                        <li class="text-sm mb-1.5 leading-relaxed">Developed core features for falconfeeds.io, a B2C threat intelligence SaaS
+                            platform, contributing
                             to its successful launch and growth to 500+ active users in just 4 months since launch.</li>
-                        <li>Built core components of our Telegram OSINT tool's backend in Python and Go, scaled to
+                        <li class="text-sm mb-1.5 leading-relaxed">Built core components of our Telegram OSINT tool's backend in Python and Go,
+                            scaled to
                             handle live updates from 100,000+ channels with an event-driven microservice-based
                             architecture.</li>
-                        <li>Optimized group addition and processing server performance, a crucial component of our
+                        <li class="text-sm mb-1.5 leading-relaxed">Optimized group addition and processing server performance, a crucial
+                            component of our
                             Telegram OSINT tool. This enhancement resulted in a significant performance improvement of
                             40% through algorithm refinements and concurrency optimizations.</li>
-                        <li>Designed and built internal tools with the Angular/Tailwind CSS front-end and Go back-end
+                        <li class="text-sm mb-1.5 leading-relaxed">Designed and built internal tools with the Angular/Tailwind CSS front-end and
+                            Go back-end
                             services, creating streamlined interfaces for threat intelligence operations.</li>
-                        <li>Built an end-to-end Role-Based Access Control (RBAC) system for all internal company tools,
+                        <li class="text-sm mb-1.5 leading-relaxed">Built an end-to-end Role-Based Access Control (RBAC) system for all internal
+                            company tools,
                             implementing SSO (Single Sign-On) and developing reusable permission modules that
                             standardized access management.</li>
-                        <li>Developed automated executive summary generation for threat reports using LLM integrations
+                        <li class="text-sm mb-1.5 leading-relaxed">Developed automated executive summary generation for threat reports using LLM
+                            integrations
                             (OpenAI GPT, Google Gemini) to process structured intelligence data and dark Web monitoring
                             feeds, reducing manual analysis workload.</li>
                     </ul>
                 </div>
 
-                <div class="experience-item">
-                    <div class="job-header">
-                        <h3>Project Intern</h3>
-                        <span class="date">April 2021</span>
+                <div class="mb-4">
+                    <div class="flex justify-between items-baseline sm:flex-col sm:items-start">
+                        <h3 class="text-[15px] font-semibold sm:mb-1">Project Intern</h3>
+                        <span class="text-sm font-normal">April 2021</span>
                     </div>
-                    <div class="company">KELTRON KSG Kochi, Kerala, IN</div>
-                    <ul class="job-points">
-                        <li>Assisted in developing and maintaining web pages using HTML, CSS, and JavaScript.</li>
-                        <li>Worked on UI improvements and responsiveness for better user experience.</li>
+                    <div class="text-sm italic mb-2">KELTRON KSG Kochi, Kerala, IN</div>
+                    <ul class="my-2 resume-job-content">
+                        <li class="text-sm mb-1.5 leading-relaxed">Assisted in developing and maintaining web pages using HTML, CSS, and
+                            JavaScript.</li>
+                        <li class="text-sm mb-1.5 leading-relaxed">Worked on UI improvements and responsiveness for better user experience.
+                        </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="resume-section">
-                <h2>CERTIFICATIONS</h2>
-                <ul class="certifications-list">
-                    <li>Machine learning by Coursera</li>
-                    <li>JavaScript Algorithms and Data Structures by freeCodeCamp</li>
+            <div class="mb-5">
+                <h2 class="text-base font-bold text-gray-800 mb-2 pb-1 border-b border-gray-200 tracking-wide">CERTIFICATIONS</h2>
+                <ul class="my-2 pl-5 certifications-list">
+                    <li class="text-sm mb-1.5 leading-relaxed">Machine learning by <span class="italic">Coursera</span></li>
+                    <li class="text-sm mb-1.5 leading-relaxed">JavaScript Algorithms and Data Structures by <span
+                            class="italic">freeCodeCamp</span></li>
                 </ul>
             </div>
         </div>
