@@ -1,14 +1,14 @@
 <div class="max-w-screen w-full">
     <div class="relative mx-auto max-w-[1400px] w-full lg:px-[80px] px-[16px] lg:py-[24px] py-[16px]">
         <div class="lg:px-[32px] px-0 flex justify-between items-center w-full">
-            <button class="flex items-center gap-2 z-[5]">
+            <button class="flex items-center gap-2 z-[5]" [routerLink]="['/']">
                 <span class="material-symbols-outlined text-20 leading-[24px] font-[500]">data_object</span>
                 <h1 class="md:text-16 text-14 font-[800] md:leading-[20px] leading-[18px] tracking-wider">NANDHU</h1>
             </button>
 
             <ul class="md:flex hidden items-center gap-[32px] text-16 font-[500] leading-[22px] font-roboto">
                 <li>
-                    <a [routerLink]="[]" fragment="skills" (click)="scrollToComponent('skills')"
+                    <a [routerLink]="['/']" fragment="skills" (click)="scrollToComponent('skills')"
                         class="flex items-center gap-2">
                         <span class="material-symbols-outlined">code</span>
                         <span>Skills</span>
@@ -16,7 +16,7 @@
                 </li>
 
                 <li>
-                    <a [routerLink]="[]" fragment="experiences" (click)="scrollToComponent('experiences')"
+                    <a [routerLink]="['/']" fragment="experiences" (click)="scrollToComponent('experiences')"
                         class="flex items-center gap-2">
                         <span class="material-symbols-outlined">work</span>
                         <span>Experience</span>
@@ -24,7 +24,7 @@
                 </li>
 
                 <li>
-                    <a [routerLink]="[]" fragment="projects" (click)="scrollToComponent('projects')"
+                    <a [routerLink]="['/']" fragment="projects" (click)="scrollToComponent('projects')"
                         class="flex items-center gap-2">
                         <span class="material-symbols-outlined">sdk</span>
                         <span>Projects</span>
@@ -32,7 +32,7 @@
                 </li>
 
                 <li>
-                    <a [routerLink]="[]" fragment="contact" (click)="scrollToComponent('contact')"
+                    <a [routerLink]="['/']" fragment="contact" (click)="scrollToComponent('contact')"
                         class="flex items-center gap-2">
                         <span class="material-symbols-outlined">mail</span>
                         <span>Contact Me</span>
@@ -41,9 +41,10 @@
             </ul>
 
             <button
+                [routerLink]="['/resume']"
                 class="md:flex hidden items-center gap-1 text-[#fff] bg-black rounded-[4px] text-14 leading-[22px] font-semibold px-[24px] py-[8px]">
                 <h2>Resume</h2>
-                <span class="material-symbols-outlined">download</span>
+                <span class="material-symbols-outlined">description</span>
             </button>
 
             <!-- Menu button with explicit text and higher weight for better visibility on iOS -->
@@ -88,34 +89,36 @@
                 <div class="flex flex-col px-8 py-8">
                     <!-- Resume button at the top of navigation -->
                     <button
+                        [routerLink]="['/resume']"
+                        (click)="toggleNavbar(); $event.stopPropagation()"
                         class="flex items-center justify-center gap-2 text-[#fff] bg-black rounded-[4px] text-14 leading-[22px] font-semibold px-[24px] py-[10px] w-full mb-6 hover:shadow-lg transition-all shadow-md">
                         <span>Resume</span>
-                        <span class="material-symbols-outlined text-[18px]">download</span>
+                        <span class="material-symbols-outlined text-[18px]">description</span>
                     </button>
                     <ul class="flex flex-col gap-6 text-16 font-[500] leading-[24px] font-roboto" [@fadeInStagger]>
                         <li>
-                            <a [routerLink]="[]" fragment="skills" (click)="scrollToComponent('skills')"
+                            <a [routerLink]="['/']" fragment="skills" (click)="scrollToComponent('skills')"
                                 class="flex items-center gap-3 py-2.5 px-3">
                                 <span class="material-symbols-outlined">code</span>
                                 <span>Skills</span>
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="[]" fragment="experiences" (click)="scrollToComponent('experiences')"
+                            <a [routerLink]="['/']" fragment="experiences" (click)="scrollToComponent('experiences')"
                                 class="flex items-center gap-3 py-2.5 px-3">
                                 <span class="material-symbols-outlined">work</span>
                                 <span>Experience</span>
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="[]" fragment="projects" (click)="scrollToComponent('projects')"
+                            <a [routerLink]="['/']" fragment="projects" (click)="scrollToComponent('projects')"
                                 class="flex items-center gap-3 py-2.5 px-3">
                                 <span class="material-symbols-outlined">sdk</span>
                                 <span>Projects</span>
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="[]" fragment="contact" (click)="scrollToComponent('contact')"
+                            <a [routerLink]="['/']" fragment="contact" (click)="scrollToComponent('contact')"
                                 class="flex items-center gap-3 py-2.5 px-3">
                                 <span class="material-symbols-outlined">mail</span>
                                 <span>Contact Me</span>
@@ -127,9 +130,11 @@
                 <!-- Remove the Resume button at the bottom -->
                 <div class="mt-auto px-8 py-8 border-t border-gray-100 hidden">
                     <button
+                        [routerLink]="['/resume']"
+                        (click)="toggleNavbar(); $event.stopPropagation()"
                         class="flex items-center justify-center gap-2 text-[#fff] bg-black rounded-[4px] text-14 leading-[22px] font-semibold px-[24px] py-[10px] w-full">
                         <span>Resume</span>
-                        <span class="material-symbols-outlined text-[18px]">download</span>
+                        <span class="material-symbols-outlined text-[18px]">description</span>
                     </button>
                 </div>
             </div>
@@ -138,7 +143,7 @@
 
 </div>
 <!-- Floating Glassmorphic Navbar - ONLY VISIBLE ON DESKTOP -->
-<div [@floatingNavbar]="isScrolled ? 'visible' : 'hidden'"
+<div [@floatingNavbar]="isScrolled && !isResumePage ? 'visible' : 'hidden'"
     class="fixed right-2 top-[45%] transform -translate-y-1/2 z-50 hidden md:block">
     <ul class="flex flex-col items-center gap-5 p-4 floating-navbar" [ngClass]="{'dark-section': isExperienceSection}">
         <li class="w-10 h-10">
@@ -149,28 +154,28 @@
             </button>
         </li>
         <li class="w-10 h-10">
-            <a [routerLink]="[]" fragment="skills" (click)="scrollToComponent('skills')"
+            <a [routerLink]="['/']" fragment="skills" (click)="scrollToComponent('skills')"
                 class="nav-icon focus:outline-none active:outline-none active:bg-transparent"
                 [ngClass]="{'active-nav-icon': currentSection === 'skills'}" title="Skills">
                 <span class="material-symbols-outlined">code</span>
             </a>
         </li>
         <li class="w-10 h-10">
-            <a [routerLink]="[]" fragment="experiences" (click)="scrollToComponent('experiences')"
+            <a [routerLink]="['/']" fragment="experiences" (click)="scrollToComponent('experiences')"
                 class="nav-icon focus:outline-none active:outline-none active:bg-transparent"
                 [ngClass]="{'active-nav-icon': currentSection === 'experiences'}" title="Experience">
                 <span class="material-symbols-outlined">work</span>
             </a>
         </li>
         <li class="w-10 h-10">
-            <a [routerLink]="[]" fragment="projects" (click)="scrollToComponent('projects')"
+            <a [routerLink]="['/']" fragment="projects" (click)="scrollToComponent('projects')"
                 class="nav-icon focus:outline-none active:outline-none active:bg-transparent"
                 [ngClass]="{'active-nav-icon': currentSection === 'projects'}" title="Projects">
                 <span class="material-symbols-outlined">sdk</span>
             </a>
         </li>
         <li class="w-10 h-10">
-            <a [routerLink]="[]" fragment="contact" (click)="scrollToComponent('contact')"
+            <a [routerLink]="['/']" fragment="contact" (click)="scrollToComponent('contact')"
                 class="nav-icon focus:outline-none active:outline-none active:bg-transparent"
                 [ngClass]="{'active-nav-icon': currentSection === 'contact'}" title="Contact">
                 <span class="material-symbols-outlined">mail</span>
@@ -179,7 +184,8 @@
     </ul>
 </div>
 <!-- Mobile Scroll To Top Button - ONLY VISIBLE ON MOBILE -->
-<div [@floatingNavbar]="isScrolled ? 'visible' : 'hidden'" class="fixed bottom-8 right-6 z-50 md:hidden">
+<div [@floatingNavbar]="isScrolled && !isResumePage ? 'visible' : 'hidden'"
+    class="fixed bottom-8 right-6 z-50 md:hidden">
     <button (click)="scrollToTop()"
         class="w-12 h-12 bg-white text-black rounded-full shadow-lg flex items-center justify-center transition-transform transform hover:scale-110 active:scale-95 border-2 border-black">
         <span class="material-symbols-outlined">arrow_upward</span>
