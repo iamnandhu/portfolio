@@ -8,4 +8,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule]
 })
-export class FooterComponent { }
+export class FooterComponent {
+  // Simple component with CSS animation
+}

@@ -6,3 +6,42 @@
     margin-top: 4rem;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
+/* Cookie Animation - simple bounce */
+@keyframes jumpCookie {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+.cookie-jump-animation {
+    display: inline-block;
+    position: relative;
+    height: 18px;
+    width: 18px;
+    margin-right: 6px;
+    vertical-align: middle;
+    animation: jumpCookie 0.8s infinite ease-in-out;
+}
+
+/* Text shake animation */
+@keyframes textShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(2px);
+    }
+
+    75% {
+        transform: translateX(-2px);
+    }
+}
