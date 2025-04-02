@@ -2,7 +2,8 @@ import { Component, HostListener, OnInit, AfterViewInit, OnDestroy } from '@angu
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { trigger, state, style, animate, transition, query, stagger } from '@angular/animations';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -63,8 +64,16 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   currentSection: string = '';
   private sectionPositions: { [key: string]: { top: number, bottom: number } } = {};
   private sections = ['skills', 'experiences', 'projects', 'contact'];
+  isResumePage = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    // Subscribe to router events to detect resume page
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      this.isResumePage = event.url.includes('/resume');
+    });
+  }
 
   ngOnInit() {
     // Initialize component
@@ -139,6 +148,11 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   onWindowScroll() {
     this.isScrolled = window.scrollY > 100;
 
+    // Skip section detection and URL updates if on resume page
+    if (this.isResumePage) {
+      return;
+    }
+
     // Precise detection based on scroll position
     const currentScroll = window.scrollY + window.innerHeight / 2; // Use middle of viewport
     this.isExperienceSection = currentScroll >= this.experienceSectionTop &&
@@ -207,14 +221,33 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // If on resume page, navigate home first
+    if (this.isResumePage) {
+      this.router.navigate(['/']);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   scrollToComponent(componentId: string) {
     this.flagMobileMenuDrawerVisible = false;
-    const element = document.getElementById(componentId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    
+    // If on resume page, need to navigate to home page first
+    if (this.isResumePage) {
+      this.router.navigate(['/'], { fragment: componentId }).then(() => {
+        const element = document.getElementById(componentId);
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+      });
+    } else {
+      // If already on home page, just scroll
+      const element = document.getElementById(componentId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   }
 }
