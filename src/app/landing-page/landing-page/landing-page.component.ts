@@ -56,15 +56,18 @@ export class LandingPageComponent implements OnInit {
       case 'skills':
         element = this.skillsComponent;
         break;
-      case 'experiences':
-        element = this.experienceComponent;
-        break;
+      // case 'experiences':
+      //   element = this.experienceComponent;
+      //   break;
       case 'projects':
         element = this.projectsComponent;
         break;
       case 'contact':
         element = this.contactComponent;
         break;
+      // case 'resume':
+      //   // element = this.resumeComponent; // Uncomment if resume route/component is added
+      //   break;
     }
 
     // Proceed if the element exists

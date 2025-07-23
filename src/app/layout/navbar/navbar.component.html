@@ -40,12 +40,12 @@
                 </li>
             </ul>
 
-            <button
+            <!-- <button
                 [routerLink]="['/resume']"
                 class="md:flex hidden items-center gap-1 text-[#fff] bg-black rounded-[4px] text-14 leading-[22px] font-semibold px-[24px] py-[8px]">
                 <h2>Resume</h2>
                 <span class="material-symbols-outlined">description</span>
-            </button>
+            </button> -->
 
             <!-- Menu button with explicit text and higher weight for better visibility on iOS -->
             <button *ngIf="!flagMobileMenuDrawerVisible" (click)="toggleNavbar(); $event.stopPropagation()"
@@ -88,13 +88,13 @@
                 <!-- Clean minimal navigation links -->
                 <div class="flex flex-col px-8 py-8">
                     <!-- Resume button at the top of navigation -->
-                    <button
+                    <!-- <button
                         [routerLink]="['/resume']"
                         (click)="toggleNavbar(); $event.stopPropagation()"
                         class="flex items-center justify-center gap-2 text-[#fff] bg-black rounded-[4px] text-14 leading-[22px] font-semibold px-[24px] py-[10px] w-full mb-6 hover:shadow-lg transition-all shadow-md">
                         <span>Resume</span>
                         <span class="material-symbols-outlined text-[18px]">description</span>
-                    </button>
+                    </button> -->
                     <ul class="flex flex-col gap-6 text-16 font-[500] leading-[24px] font-roboto" [@fadeInStagger]>
                         <li>
                             <a [routerLink]="['/']" fragment="skills" (click)="scrollToComponent('skills')"
