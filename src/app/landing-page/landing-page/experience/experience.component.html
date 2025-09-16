@@ -1,35 +1,41 @@
 <div class="w-full bg-black lg:my-[40px] my-[20px] lg:py-[60px] py-[30px]">
     <div class="mx-auto max-w-[1400px] w-full px-4 lg:px-20 py-4 lg:py-6">
         <div class="w-full flex justify-center">
-            <h1 class="text-white lg:text-[48px] text-[22px] lg:leading-[55px] leading-[28px]">My <span
-                    class="font-extrabold">Experience</span></h1>
+            <h1 class="text-white lg:text-[48px] text-[24px] lg:leading-[55px] leading-[30px]">My <span
+                    class="font-[800]">Experience</span></h1>
         </div>
         
         <div class="flex flex-col gap-[32px] lg:mt-[60px] mt-[32px]">
 
             <div class="flex flex-col gap-6 lg:gap-7 lg:px-6 px-4 lg:py-8 py-6 border border-zinc-500 rounded-[6px]"
                 *ngFor="let item of experiences">
-                <div class="flex items-start flex-wrap sm:justify-between gap-x-[12px] gap-y-[8px] ">
-                    <span class="flex items-center gap-[16px]">
-                        <img [src]="item.pathToCompanyLogo" alt="" class="w-[24px] h-[24px]">
-                        <h3
-                            class="text-white font-medium tracking-wide lg:text-18 text-15 lg:leading-[26px] leading-[22px] flex flex-wrap items-start gap-[4px] text-wrap">
-                            {{item.designation}} at
-                            <a [href]="item.companyLinkedinURL" target="_blank">{{item.companyName}}
-                                <span class="material-symbols-outlined text-[14px]">open_in_new</span>
-                            </a>
+                <div class="flex flex-col gap-2">
+                    <!-- First line: Logo + Company Name -->
+                    <div class="flex items-center gap-[12px] lg:gap-[16px]">
+                        <a href="https://www.falconfeeds.io" target="_blank">
+                            <img [src]="item.pathToCompanyLogo" alt="" class="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]">
+                        </a>
+                        <h3 class="text-white font-medium tracking-wide lg:text-[18px] text-[15px] lg:leading-[26px] leading-[22px]">
+                            <a href="https://www.falconfeeds.io" target="_blank" class="hover:underline">FalconFeeds.io</a>
+                            <span class="italic text-slate-300"> (pwd. by Technisanct)</span>
                         </h3>
-                    </span>
-
-                    <h4 class="text-slate-300 font-medium tracking-wide text-13 lg:text-14 leading-[20px] lg:leading-[22px]">
-                        {{convertToDateObj(item.startDate) | date:'MMM yyyy'}} - {{item.isWorking ? 'Present' :
-                        convertToDateObj(item.endDate)}}</h4>
+                    </div>
+                    <!-- Second line: Designation and Time -->
+                    <div class="flex items-start flex-wrap sm:justify-between gap-x-[12px] gap-y-[8px]">
+                        <h4 class="text-slate-300 font-medium tracking-wide lg:text-[16px] text-[14px] lg:leading-[24px] leading-[20px]">
+                            {{item.designation}}
+                        </h4>
+                        <h4 class="text-slate-300 font-medium tracking-wide text-[13px] lg:text-[14px] leading-[20px] lg:leading-[22px]">
+                            {{convertToDateObj(item.startDate) | date:'MMM yyyy'}} - {{item.isWorking ? 'Present' :
+                            convertToDateObj(item.endDate)}}
+                            </h4>
+                            </div>
                 </div>
 
                 <div>
-                    <ul class="pl-4 lg:pl-5 text-zinc-300">
+                    <ul class="pl-3 lg:pl-4 text-zinc-300">
                         <li *ngFor="let point of getDescriptionPoints(item.desription)"
-                            class="text-13 lg:text-14 leading-[20px] lg:leading-[22px] tracking-wide mb-2 flex">
+                            class="text-[13px] lg:text-[14px] leading-[20px] lg:leading-[22px] tracking-wide mb-2 flex">
                             <span class="inline-block mr-2 text-zinc-300">•</span>
                             <span>{{point}}</span>
                         </li>
