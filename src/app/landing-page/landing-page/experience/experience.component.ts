@@ -28,7 +28,7 @@ export class ExperienceComponent implements OnInit {
       startDate: "2023-01-16",
       isWorking: true,
       endDate: "",
-      desription: "As a full-stack engineer at FalconFeeds.io, I helped build its cybersecurity SaaS platform from an initial concept into a revenue-generating product. I guided architectural decisions, contributed to the product roadmap, and mentored engineers while working with a cross-functional team to deliver core features.\n• Key projects included a large-scale IOC collection framework, AI-powered threat Analysis, and a multi-channel alerts system.\n• My role also involved acting as a key engineering contact for clients, leading their technical integrations."
+      desription: "As Backend Engineering Lead at FalconFeeds.io, I built and scaled a cybersecurity threat intelligence platform. \n I optimized system performance through caching strategies that reduced analytics latency to sub-second response times.\nArchitected a real-time threat monitoring pipeline processing 25,000+ channels with 50-100ms latency.\n My work on API integrations and an MCP server drove Pro subscription conversion and bringing in new revenue. \nBuilt AI-powered analysis features reducing researcher investigation time."
     }
   ]
 
